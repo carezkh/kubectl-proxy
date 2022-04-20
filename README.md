@@ -14,13 +14,13 @@ Goals:
 
 Object access is achieved through K8S [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/).
 
-You can refer to [example/rbac.yaml](/example/rbac.yaml) to create your own access permissions.
+You can refer to [examples/rbac.yaml](/examples/rbac.yaml) to create your own access permissions.
 
 Here, we create a **ClusterRole** *kubectl-proxy* which can `get` and `list` Pod, and bind it to **ServiceAccount** *kubectl-proxy*.
 
 ## Proxy Local Traffics
 
-You can refer to [example/local-proxy.yaml](/example/local-proxy.yaml) to deploy the proxy as a ambassador container (also named sidecar).
+You can refer to [examples/local-proxy.yaml](/examples/local-proxy.yaml) to deploy the proxy as a ambassador container (also named sidecar).
 
 Here, we create a Pod *local-proxy* with above **ServiceAccount** *kubectl-proxy*, and run two containers `curl` and `kubectl-proxy`. Notice the args `--wide local` in container `kubectl-proxy`, which means this proxy only listening in localhost.
 
@@ -35,7 +35,7 @@ curl localhost:8080/api/v1/namespaces/default/pods/local-proxy
 
 ## Proxy Remote Traffics
 
-You can refer to [example/cluster-proxy.yaml](/example/cluster-proxy.yaml) to deploy the proxy as a cluster proxy.
+You can refer to [examples/cluster-proxy.yaml](/examples/cluster-proxy.yaml) to deploy the proxy as a cluster proxy.
 
 Here, we create a Pod *cluster-proxy* with above **ServiceAccount* *kubectl-proxy*, and a Service *cluster-proxy* to access the proxy easily. Notice the args `--wide cluster` in container, which means this proxy listening in 0.0.0.0
 
