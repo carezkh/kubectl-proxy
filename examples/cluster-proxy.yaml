@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cluster-proxy
+  labels:
+    name: cluster-proxy
+spec:
+  serviceAccountName: kubectl-proxy
+  containers:
+    - name: kubectl-proxy
+      image: carezkh/kubectl-proxy:v0.1.0
+      args: ["--wide", "cluster"]
+      ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cluster-proxy
+spec:
+  selector:
+    name: cluster-proxy
+  ports:
+    - port: 80
+      targetPort: 8080
